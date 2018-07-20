@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import type {ChatState, Message} from "./types/types";
+import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
+import Message from './components/Message';
 import {handleMessageReceived} from "./actions/ChatActions";
 import {handleSubmitMessage} from "./action-creators/ChatActionCreator";
 
@@ -11,7 +12,7 @@ import './App.css';
 
 type AppProps = {
   nickname: string,
-  messages : Array<Message>,
+  messages : Array<MessageType>,
   handleMessageReceived : Function,
   handleSubmitMessage : (message : string) => any 
 }
@@ -34,7 +35,7 @@ class App extends Component<AppProps> {
       <div className="App">
         <Header title= {this.props.nickname} />
         { this.props.messages.map((message) => {
-          return (<div key={message.messageId}>{message.value}</div>);
+          return (<Message key={message.messageId} value={message.value} userId={message.userId}/>);
         })}
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
       </div>
