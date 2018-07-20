@@ -17,7 +17,14 @@ type AppProps = {
 class App extends Component<AppProps> {
 
   componentDidMount() {
-    this.props.addNewMessage("teste");
+    var source : EventSource = new EventSource("http://localhost/api/chat/sse");
+    this.setState(source);
+    source.addEventListener("message_submited", (e) => {
+      if (e.data) {
+        var messageObject = JSON.parse(e.data);
+        this.props.addNewMessage(messageObject);
+      }
+    });
   }
 
   render() {
