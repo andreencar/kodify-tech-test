@@ -21,3 +21,15 @@ export function handleSubmitMessage(payload : any) {
         });
     };
 }
+
+export function handleReceiveMessage(message : Message) {
+    return (dispatch : any, getState : () => ChatState )  => {
+        if (message.value) {
+            const isCommand : boolean = message.value.charAt(0) === "/";
+            if (isCommand) {
+                const commandArgs = message.split(" ");
+                const commandName = commandArgs[0].substring(1);
+            }
+        }
+    }
+}
