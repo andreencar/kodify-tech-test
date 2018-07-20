@@ -9,5 +9,5 @@ const initialState : ChatState = {
 }
 
 export default (state : ChatState = initialState, action : any) => {
-
+    return state;
 }

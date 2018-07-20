@@ -1,23 +1,34 @@
+// @flow
+
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import type {ChatState} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 
 import './App.css';
 
-class App extends Component {
+type AppProps = {
+  nickname: string
+}
 
-  componentDidMount () {
-    
-  }
+class App extends Component<AppProps> {
+
 
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header title= {this.props.nickname} />
         <Chatbox />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state : ChatState) : AppProps {
+  return {
+    nickname: state.nickname,
+  };
+}
+
+export default connect(mapStateToProps)(App);
