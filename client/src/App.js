@@ -5,13 +5,15 @@ import type {ChatState, Message} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import {handleMessageReceived} from "./actions/ChatActions";
+import {handleSubmitMessage} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
 type AppProps = {
   nickname: string,
   messages : Array<Message>,
-  handleMessageReceived : Function
+  handleMessageReceived : Function,
+  handleSubmitMessage : (message : string) => any 
 }
 
 class App extends Component<AppProps> {
@@ -34,7 +36,7 @@ class App extends Component<AppProps> {
         { this.props.messages.map((message) => {
           return (<div key={message.messageId}>{message.value}</div>);
         })}
-        <Chatbox />
+        <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
       </div>
     );
   }
@@ -47,4 +49,4 @@ function mapStateToProps(state : ChatState) : $Shape<AppProps> {
   };
 }
 
-export default connect(mapStateToProps, {handleMessageReceived})(App);
+export default connect(mapStateToProps, {handleMessageReceived, handleSubmitMessage})(App);
