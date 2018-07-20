@@ -1,34 +1,43 @@
 // @flow
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import type {ChatState} from "./types/types";
+import type {ChatState, Message} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
+import {addNewMessage} from "./actions/ChatActions";
 
 import './App.css';
 
 type AppProps = {
-  nickname: string
+  nickname: string,
+  messages : Array<Message>,
+  addNewMessage : Function
 }
 
 class App extends Component<AppProps> {
 
+  componentDidMount() {
+    this.props.addNewMessage("teste");
+  }
 
   render() {
     return (
       <div className="App">
         <Header title= {this.props.nickname} />
+        { this.props.messages.map((message) => {
+          return (<div>{message}</div>);
+        })}
         <Chatbox />
       </div>
     );
   }
 }
 
-function mapStateToProps(state : ChatState) : AppProps {
+function mapStateToProps(state : ChatState) : $Shape<AppProps> {
   return {
     nickname: state.nickname,
+    messages : state.messages
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {addNewMessage})(App);
