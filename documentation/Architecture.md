@@ -9,3 +9,5 @@ After I will start by creating my react app, focusing on the functionality side 
 As a side note, the client will be created with create-react-app as it would be a bonus to have webpack functionality and this provides me a fast and easy bootstrap.
 
 For the server, a basic ExpressJS application will be used.
+
+For the messages to appear on one or the other side according to being incoming or outgoing messages, messages need to be attached with a user id. Since the requirements clearly indicate most operations must be done on client side, I will generate a userId upon app initialization on client side... But this should not be done in a real world situation.
