@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Kodify Tecnhical Test server",
+  "main": "index.js",
+  "author": "André Encarnação",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
