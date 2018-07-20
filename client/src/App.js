@@ -10,6 +10,10 @@ import {handleSubmitMessage} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
+declare class EventSource extends EventTarget {
+  constructor(url: string): EventSource;
+}
+
 type AppProps = {
   nickname: string,
   messages : Array<MessageType>,
@@ -17,12 +21,18 @@ type AppProps = {
   handleSubmitMessage : (message : string) => any 
 }
 
-class App extends Component<AppProps> {
+type AppState = {
+  source : EventSource
+}
+
+class App extends Component<AppProps, AppState> {
 
   componentDidMount() {
     var source : EventSource = new EventSource("http://localhost:8080/api/chat/sse");
-    this.setState(source);
-    source.addEventListener("message_submited", (e) => {
+    this.setState({
+      source : source
+    });
+    source.addEventListener("message_submited", (e : any) => {
       if (e.data) {
         var messageObject = JSON.parse(e.data);
         this.props.handleMessageReceived(messageObject);
