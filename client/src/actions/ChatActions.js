@@ -8,3 +8,10 @@ export const handleMessageReceived = (payload : Message) => {
         payload: payload
       };
   }
+
+  export const handleNicknameReceived = (nickname : string) => {
+      return {
+          type : ChatActionTypes.NICKNAME_SET,
+          payload : nickname
+      }
+  }

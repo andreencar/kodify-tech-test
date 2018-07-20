@@ -5,8 +5,7 @@ import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import Message from './components/Message';
-import {handleMessageReceived} from "./actions/ChatActions";
-import {handleSubmitMessage} from "./action-creators/ChatActionCreator";
+import {handleSubmitMessage, handleMessageReceived} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
