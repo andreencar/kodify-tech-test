@@ -1,14 +1,18 @@
 const express = require("express");
+const SSEChannel = require('sse-pubsub');
 
 const router = express.Router();
 const app = express();
+const channel = new SSEChannel();
 
 router.post("/chat/", function (req, res) {
-
+    const submitedMessage = req.body.message;
+    channel.publish(submitedMessage, "message_submited");
+    res.sendStatus(200);
 });
 
 router.get("/chat/sse", function (req, res) {
-
+    return channel.subscribe(req, res)
 });
 
 app.use('/api', router);
