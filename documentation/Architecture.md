@@ -15,3 +15,12 @@ For the messages to appear on one or the other side according to being incoming 
 ------
 
 At this point in time, I'm already able to send and receive messages, so now I will start to build the message service that will process commands.
+
+
+------
+
+Had to do a stop at 18:00 GMT. Will resume as soon as possible
+
+Timetable:
+
+15:00 - 18:00

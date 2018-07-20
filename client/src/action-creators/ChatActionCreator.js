@@ -1,6 +1,6 @@
 // @flow
 import { Message, ChatState } from '../types/types';
-import { handleNicknameReceived } from '../actions/ChatActions';
+import { handleNicknameReceived, handleDisplayMessage } from '../actions/ChatActions';
 import generateUUID from 'uuid/v4';
 
 export function handleSubmitMessage(payload : any) {
@@ -34,10 +34,12 @@ export function handleMessageReceived(message : Message) {
                 switch (commandName) {
                     case "nick": {
                         if (getState().currentUserId !== message.userId) {
-                            return handleNicknameReceived(stringAfterCommand);
+                            dispatch(handleNicknameReceived(stringAfterCommand));
                         }
                     }
+                    break;
                     default:
+                        dispatch(handleDisplayMessage(message))
                         // TO IMPLEMENT
                 }
             }

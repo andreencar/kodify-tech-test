@@ -14,6 +14,9 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
         case ChatActionTypes.MESSAGE_RECEIVED: {
             return {...state, messages : [...state.messages, action.payload]};
         }
+        case ChatActionTypes.NICKNAME_SET: {
+            return {...state, nickname : action.payload};
+        }
         default:
             return state;
     }
