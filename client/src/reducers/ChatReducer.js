@@ -17,5 +17,4 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
         default:
             return state;
     }
-   
 }
