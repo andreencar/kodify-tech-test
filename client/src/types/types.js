@@ -2,6 +2,7 @@ export type Message = {
     value : string;
     userId : string;
     messageId : string;
+    isThink : ?boolean
 }
 
 export type ChatState = {

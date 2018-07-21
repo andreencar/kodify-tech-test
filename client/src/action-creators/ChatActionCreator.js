@@ -38,6 +38,11 @@ export function handleMessageReceived(message : Message) {
                         }
                     }
                     break;
+                    case "think": {
+                        const messageWithThink = {...message, value: stringAfterCommand, isThink : true}
+                        dispatch(handleDisplayMessage(messageWithThink));
+                    }
+                    break;
                     default:
                         dispatch(handleDisplayMessage(message))
                         // TO IMPLEMENT
