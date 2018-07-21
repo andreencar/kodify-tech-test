@@ -9,6 +9,13 @@ export const handleDisplayMessage = (payload : Message) => {
       };
   }
 
+  export const handleUpdateMessage = (message : Message) => {
+    return {
+        type : ChatActionTypes.MESSAGE_UPDATED,
+        payload : message
+    }
+}
+
   export const handleNicknameReceived = (nickname : string) => {
       return {
           type : ChatActionTypes.NICKNAME_SET,

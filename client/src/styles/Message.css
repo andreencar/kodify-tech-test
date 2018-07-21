@@ -30,6 +30,10 @@
     filter: brightness(90%);
 }
 
+.Message--fade {
+    opacity: 10%
+}
+
 @keyframes slideRight {
     0% {
         margin-right: -200px;

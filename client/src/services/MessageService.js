@@ -3,7 +3,7 @@ import _ from 'lodash';
 import generateUUID from 'uuid/v4';
 import emoji from "emoji-dictionary";
 
-import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage } from '../actions/ChatActions';
+import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage } from '../actions/ChatActions';
 
 import { Message, ChatState } from '../types/types';
 
@@ -18,6 +18,7 @@ class MessageService {
                 const commandArgs = message.value.split(" ");
                 const commandName = commandArgs[0].substring(1);
                 const stringAfterCommand = message.value.substr(message.value.indexOf(' ')+1);
+
                 switch (commandName) {
                     case "nick": {
                         if (getState().currentUserId !== message.userId && commandArgs.length > 1) {
@@ -33,8 +34,7 @@ class MessageService {
                     }
                     break;
                     case "oops": {
-                        const orderedMessages = _.orderBy(getState().messages, ['timestamp'],['asc']);
-                        const messageToRemove = _.findLast(orderedMessages, (msg) => { return msg.userId === message.userId});
+                        const messageToRemove = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToRemove) {
                             return handleRemoveMessage(messageToRemove.messageId);
                         }
@@ -47,13 +47,27 @@ class MessageService {
                         }
                     }
                     break;
+                    case "fadelast": {
+                        const messageToFade = this.GetLastMessageFromUser(getState().messages, message.userId);
+                        if (messageToFade) {
+                            const messageWithFade = {...message, value: stringAfterCommand, isFade : true};
+                            return handleUpdateMessage(messageWithFade);
+                        }
+                    }
+                    break;
                     default:
-                    return handleDisplayMessage(message);
+                        return handleDisplayMessage(message);
                 }
             } else {
                 return handleDisplayMessage(message);
             }
         }
+    }
+
+    GetLastMessageFromUser = (messages : Array<Message>, userId : string) : Message => {
+        const orderedMessages = _.orderBy(messages, ['timestamp'],['asc']);
+        const lastUserMessage = _.findLast(orderedMessages, (msg) => { return msg.userId === userId});
+        return lastUserMessage;
     }
     
     SubmitMessage = async (userId : string, message : string) => {

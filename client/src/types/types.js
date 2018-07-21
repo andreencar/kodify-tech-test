@@ -5,6 +5,7 @@ export type Message = {
     isThink : ?boolean;
     isHighlight: ?boolean;
     isIncoming : ?boolean;
+    isFade : ?boolean;
     timestamp : number;
 }
 
