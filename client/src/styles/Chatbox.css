@@ -1,5 +1,9 @@
 .Chatbox {
     display: flex;
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     flex:1;
     height: 25px;
     padding: 5px;
