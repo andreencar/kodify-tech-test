@@ -25,9 +25,10 @@ export function handleSubmitMessage(payload : any) {
     };
 }
 
-export function handleMessageReceived(message : Message) {
+export function handleMessageReceived(receivedMessage : Message) {
     return (dispatch : any, getState : () => ChatState )  => {
-        if (message.value) {
+        if (receivedMessage.value) {
+            const message = {...receivedMessage, isIncoming: getState().currentUserId !== receivedMessage.userId};
             const isCommand : boolean = message.value.charAt(0) === "/";
             if (isCommand) {
                 const commandArgs = message.value.split(" ");

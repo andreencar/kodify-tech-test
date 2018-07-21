@@ -1,0 +1,24 @@
+.Message {
+    padding: 8px 10px;
+    max-width: 200px;
+    margin: 5px 10px;
+    border-radius: 15px;
+    clear: both;
+    word-wrap: break-word;
+}
+
+.Message--mine {
+    align-self: flex-end;
+    color: #000;
+    background: linear-gradient(#d7e9d3 0%,#a0cf57 30%,#a0cf57 70%,#d7e9d3 100%);
+}
+
+.Message--theirs {
+    align-self: flex-start;
+    color: #000;
+    background: linear-gradient(#eceaec 0%,#cfcecf 30%,#cfcecf 70%,#eceaec 100%);
+}
+
+.Message--think {
+    color: #a9a9a9;
+}

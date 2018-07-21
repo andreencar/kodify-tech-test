@@ -1,0 +1,15 @@
+.App {
+    display: flex; 
+    flex:1;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.App--MessageList--wrapper {
+    display: flex;
+    height: 100%;
+    padding-top:50px;
+    padding-bottom: 50px;
+    background-color: #d7dce6;
+}
