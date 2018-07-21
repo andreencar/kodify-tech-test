@@ -50,7 +50,7 @@ class MessageService {
                     case "fadelast": {
                         const messageToFade = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToFade) {
-                            const messageWithFade = {...message, value: stringAfterCommand, isFade : true};
+                            const messageWithFade = {...messageToFade, isFade : true};
                             return handleUpdateMessage(messageWithFade);
                         }
                     }

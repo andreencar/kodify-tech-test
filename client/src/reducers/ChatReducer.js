@@ -20,6 +20,9 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
         case ChatActionTypes.MESSAGE_REMOVED: {
             return {... state, messages : state.messages.filter((message) => { return message.messageId !== action.payload})}
         }
+        case ChatActionTypes.MESSAGE_UPDATED: {
+            return {... state, messages : state.messages.map((message) => { return message.messageId !== action.payload.messageId ? message : action.payload})}
+        }
         default:
             return state;
     }
