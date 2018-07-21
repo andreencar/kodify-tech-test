@@ -54,6 +54,8 @@ export function handleMessageReceived(message : Message) {
                     default:
                         dispatch(handleDisplayMessage(message));
                 }
+            } else {
+                dispatch(handleDisplayMessage(message));
             }
         }
     }
