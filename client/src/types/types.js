@@ -2,7 +2,8 @@ export type Message = {
     value : string;
     userId : string;
     messageId : string;
-    isThink : ?boolean
+    isThink : ?boolean;
+    timestamp : number;
 }
 
 export type ChatState = {

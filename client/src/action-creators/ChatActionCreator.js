@@ -8,7 +8,8 @@ export function handleSubmitMessage(payload : any) {
         const messageToSubmit : Message = {
             messageId : generateUUID(),
             userId : getState().currentUserId,
-            value : payload
+            value : payload,
+            timestamp : new Date().getTime()
         };
         await fetch("http://localhost:8080/api/chat", {
             method : "POST",
@@ -43,6 +44,7 @@ export function handleMessageReceived(message : Message) {
                         dispatch(handleDisplayMessage(messageWithThink));
                     }
                     break;
+
                     default:
                         dispatch(handleDisplayMessage(message))
                         // TO IMPLEMENT
