@@ -26,6 +26,10 @@ Had to do a stop at 18:00 GMT. Will resume as soon as possible
 Came back, unfortunately I really had to stop. Resuming at 14:45 GMT
 
 ------
+
+Added timestamp to message. This is mandatory to be on server side, but for technical test purposes and because the exam said to maintain most logic client side, I will use the client timestamp
+
+------
 Timetable:
 
 15:00 - 18:00
