@@ -1,6 +1,6 @@
 // @flow
 import MessageService from "./services/MessageService";
-import ChatActionTypes from "./actions/ChatActionTypes";
+import * as ChatActionTypes from "./actions/ChatActionTypes";
 
 import type Message from "./types/types";
 
@@ -18,7 +18,7 @@ describe("When /oops command is received", () => {
             userId : "teste",
             value : "/oops"
         };
-        const result = MessageService.ProcessIncomingMessage(message, state);
+        const result : any = MessageService.ProcessIncomingMessage(message, state);
         expect(result).toBeTruthy();
         expect(result.type).toBe(ChatActionTypes.MESSAGE_REMOVED);
         expect(result.payload).toEqual("123");
