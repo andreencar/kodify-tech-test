@@ -47,8 +47,10 @@ export function handleMessageReceived(message : Message) {
                     break;
                     case "oops": {
                         const orderedMessages = _.orderBy(getState().messages, ['timestamp'],['asc']);
-                        const messageToRemove = _.findLast(orderedMessages, (message) => { return message.userId === message.userId});
-                        dispatch(handleRemoveMessage(messageToRemove.messageId));
+                        const messageToRemove = _.findLast(orderedMessages, (msg) => { return msg.userId === message.userId});
+                        if (messageToRemove) {
+                            dispatch(handleRemoveMessage(messageToRemove.messageId));
+                        }
                     }
                     break;
                     default:
