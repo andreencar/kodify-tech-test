@@ -1,10 +1,53 @@
 // @flow
 import React, { Component } from 'react';
-import type { Message as MessageType } from '../types/types';
 import classNames from 'classnames';
 import '../styles/Message.css';
 
+type MessageType = {
+  value : string;
+  userId : string;
+  messageId : string;
+  isThink : ?boolean;
+  isHighlight: ?boolean;
+  isIncoming : ?boolean;
+  isFade : ?boolean;
+  countdownTime : number;
+  timestamp : number;
+  onCountdownTimeFinished : Function
+}
+
+type MessageState = {
+  counter : ?number;
+}
+
 class Message extends Component<MessageType> {
+
+  countdownInterval : IntervalID;
+
+  componentDidMount () {
+    if (this.props.countdownTime) {
+      this.countdownInterval = setInterval(
+        () => this.setState(this.decrementCounter),
+        1000
+      );
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+  }
+
+  decrementCounter = (prevState : any) : $Shape<MessageState> => {
+    var result : $Shape<MessageState> = {};
+    if (prevState.counter) {
+      result = {
+        counter : prevState.counter - 1
+      };
+    }
+    return result;
+  }
 
   render() {
     const messageClass = classNames({
