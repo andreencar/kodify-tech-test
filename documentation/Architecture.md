@@ -21,6 +21,12 @@ At this point in time, I'm already able to send and receive messages, so now I w
 
 Had to do a stop at 18:00 GMT. Will resume as soon as possible
 
+------
+
+Came back, unfortunately I really had to stop. Resuming at 14:45 GMT
+
+------
 Timetable:
 
 15:00 - 18:00
+14:45 - x
