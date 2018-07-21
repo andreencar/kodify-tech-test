@@ -11,14 +11,35 @@
     align-self: flex-end;
     color: #000;
     background: linear-gradient(#d7e9d3 0%,#a0cf57 30%,#a0cf57 70%,#d7e9d3 100%);
+    animation: slideRight 0.5s;
 }
 
 .Message--theirs {
     align-self: flex-start;
     color: #000;
     background: linear-gradient(#eceaec 0%,#cfcecf 30%,#cfcecf 70%,#eceaec 100%);
+    animation: slideLeft 0.5s;
 }
 
 .Message--think {
     color: #a9a9a9;
+}
+
+
+@keyframes slideRight {
+    0% {
+        margin-right: -200px;
+    }
+    100% {
+        margin-right: -20;
+    }
+}
+
+@keyframes slideLeft {
+  0% {
+      margin-left: -200px;
+  }
+  100% {
+      margin-left: -20;
+  }
 }
