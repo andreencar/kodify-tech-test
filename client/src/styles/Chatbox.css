@@ -1,12 +1,17 @@
 .Chatbox {
     display: flex;
     flex:1;
+    height: 30px
 }
 
 .Chatbox--input {
     flex:1;
+    border-radius: 15px;
 }
 
 .Chatbox--button {
     width:60px;
+    border-radius: 15px;
+    color: #ffffff;
+    background : linear-gradient(#a3c56e, #5e8d36);
 }
