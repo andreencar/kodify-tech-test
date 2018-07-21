@@ -17,6 +17,9 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
         case ChatActionTypes.NICKNAME_SET: {
             return {...state, nickname : action.payload};
         }
+        case ChatActionTypes.MESSAGE_REMOVED: {
+            return {... state, messages : state.messages.filter((message) => { return message.messageId !== action.payload})}
+        }
         default:
             return state;
     }

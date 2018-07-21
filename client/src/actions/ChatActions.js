@@ -15,3 +15,10 @@ export const handleDisplayMessage = (payload : Message) => {
           payload : nickname
       }
   }
+
+  export const handleRemoveMessage = (messageId : string) => {
+    return {
+        type : ChatActionTypes.MESSAGE_REMOVED,
+        payload : messageId
+    }
+}

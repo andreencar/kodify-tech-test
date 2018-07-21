@@ -1,7 +1,8 @@
 // @flow
 import { Message, ChatState } from '../types/types';
-import { handleNicknameReceived, handleDisplayMessage } from '../actions/ChatActions';
+import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage } from '../actions/ChatActions';
 import generateUUID from 'uuid/v4';
+import _ from 'lodash';
 
 export function handleSubmitMessage(payload : any) {
     return async (dispatch : any, getState : () => ChatState ) => {
@@ -44,10 +45,14 @@ export function handleMessageReceived(message : Message) {
                         dispatch(handleDisplayMessage(messageWithThink));
                     }
                     break;
-
+                    case "oops": {
+                        const orderedMessages = _.orderBy(getState().messages, ['timestamp'],['asc']);
+                        const messageToRemove = _.findLast(orderedMessages, (message) => { return message.userId === message.userId});
+                        dispatch(handleRemoveMessage(messageToRemove.messageId));
+                    }
+                    break;
                     default:
-                        dispatch(handleDisplayMessage(message))
-                        // TO IMPLEMENT
+                        dispatch(handleDisplayMessage(message));
                 }
             }
         }
