@@ -20,16 +20,13 @@ type MessageState = {
   counter : ?number;
 }
 
-class Message extends Component<MessageType> {
+class Message extends Component<MessageType, MessageState> {
 
   countdownInterval : IntervalID;
 
   componentDidMount () {
     if (this.props.countdownTime) {
-      this.countdownInterval = setInterval(
-        () => this.setState(this.decrementCounter),
-        1000
-      );
+      this.countdownInterval = setInterval(this.handleCountdown, 1000);
     }
   }
 
@@ -37,6 +34,14 @@ class Message extends Component<MessageType> {
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
     }
+  }
+
+  handleCountdown = () => {
+    if (this.state.counter === 1) {
+      clearInterval(this.countdownInterval);
+      this.props.onCountdownTimeFinished();
+    }
+    this.setState(this.decrementCounter);
   }
 
   decrementCounter = (prevState : any) : $Shape<MessageState> => {
@@ -61,6 +66,7 @@ class Message extends Component<MessageType> {
 
     return (
       <div className={messageClass}>
+        {this.state.counter && <span className="Message--countdown" >{this.state.counter}</span>}
         {this.props.value}
       </div>
     );

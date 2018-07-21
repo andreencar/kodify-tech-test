@@ -55,6 +55,12 @@ class MessageService {
                         }
                     }
                     break;
+                    case "countdown": {
+                        if (commandArgs.length > 2) {
+                            const countdownMessage = {...message, value: commandArgs[2], countdownTimer : commandArgs[1]}
+                            return handleDisplayMessage(countdownMessage);
+                        }
+                    }
                     default:
                         return handleDisplayMessage(message);
                 }
