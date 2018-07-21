@@ -1,6 +1,7 @@
 // @flow
 import _ from 'lodash';
 import generateUUID from 'uuid/v4';
+import emoji from "emoji-dictionary";
 
 import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage } from '../actions/ChatActions';
 
@@ -9,7 +10,9 @@ import { Message, ChatState } from '../types/types';
 class MessageService {
     ProcessIncomingMessage = (receivedMessage : Message, getState : () => ChatState  ) => {
         if (receivedMessage.value) {
-            const message = {...receivedMessage, isIncoming: getState().currentUserId !== receivedMessage.userId};
+            const emojiValue : string = this.ProcessEmoji(receivedMessage.value);
+            const isIncoming : boolean = getState().currentUserId !== receivedMessage.userId;
+            const message = {...receivedMessage, value : emojiValue , isIncoming : isIncoming};
             const isCommand : boolean = message.value.charAt(0) === "/";
             if (isCommand) {
                 const commandArgs = message.value.split(" ");
@@ -69,6 +72,17 @@ class MessageService {
             body : JSON.stringify({
                 message : messageToSubmit
             })
+        });
+    }
+
+    ProcessEmoji = (messageValue : string) => {
+        return messageValue.replace(/\(([^\)]+)\)/g, (match, name) => {
+            const unicode = emoji.getUnicode(name);
+            if (unicode) {
+                return unicode;
+            } else {
+                return match;
+            }
         });
     }
 }
