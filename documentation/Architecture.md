@@ -31,6 +31,8 @@ Added timestamp to message. This is mandatory to be on server side, but for tech
 
 Decided to use macbook digital colour meter and images from ios6 message app to identify the correct colors to use on the chat
 
+Finished the basic technical test implementation at 17:13. Will proceed to the bonus points.
+
 ------
 Timetable:
 
