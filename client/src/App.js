@@ -44,7 +44,7 @@ class App extends Component<AppProps, AppState> {
       <div className="App">
         <Header title= {this.props.nickname} />
         { this.props.messages.map((message) => {
-          return (<Message key={message.messageId} value={message.value} userId={message.userId}/>);
+          return (<Message key={message.messageId} {...message}/>);
         })}
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
       </div>

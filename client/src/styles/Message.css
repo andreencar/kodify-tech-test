@@ -1,0 +1,11 @@
+.Message {
+
+}
+
+.Message--mine {
+    align-self: flex-end;
+}
+
+.Message--theirs {
+    align-self: flex-right
+}
