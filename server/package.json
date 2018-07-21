@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Kodify Tecnhical Test server",
+  "main": "index.js",
+  "author": "André Encarnação",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "sse-pubsub": "^1.2.1"
+  }
+}
