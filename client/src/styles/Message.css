@@ -16,4 +16,6 @@
 
 .Message--theirs {
     align-self: flex-start;
+    color: #000;
+    background: linear-gradient(#eceaec 0%,#cfcecf 30%,#cfcecf 70%,#eceaec 100%);
 }
