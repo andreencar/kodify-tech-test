@@ -1,4 +1,4 @@
-# Architecture
+# Changelog
 
 After reviewing the technical test, I will start by fullfiling the basic requirements and update my application after to do the bonus points.
 
@@ -37,4 +37,5 @@ Finished the basic technical test implementation at 17:13. Will proceed to the b
 Timetable:
 
 15:00 - 18:00
-14:45 - x
+14:45 - 20:40 (have dinner)
+00:10 - x
