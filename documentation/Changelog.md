@@ -34,6 +34,12 @@ Decided to use macbook digital colour meter and images from ios6 message app to 
 Finished the basic technical test implementation at 17:13. Will proceed to the bonus points.
 
 ------
+
+On the final bonus point which is user typing. I'm thinking about adding a /typing command sent when the user types with some sort of debounce on the client that is typing.
+
+The client that is receiving needs to be able to reset the typing state after x time as well.
+
+
 Timetable:
 
 15:00 - 18:00

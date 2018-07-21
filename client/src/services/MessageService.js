@@ -3,7 +3,7 @@ import _ from 'lodash';
 import generateUUID from 'uuid/v4';
 import emoji from "emoji-dictionary";
 
-import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage } from '../actions/ChatActions';
+import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage, handleUserStartedTyping } from '../actions/ChatActions';
 
 import { Message, ChatState } from '../types/types';
 
@@ -62,6 +62,11 @@ class MessageService {
                         }
                     }
                     break;
+                    case "typing": {
+                        if (getState().currentUserId !== message.userId) {
+                            return handleUserStartedTyping();
+                        }
+                    }
                     default:
                         return handleDisplayMessage(message);
                 }
