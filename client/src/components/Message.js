@@ -10,7 +10,8 @@ class Message extends Component<MessageType> {
     const messageClass = classNames({
       Message: true,
       'Message--mine': !this.props.isIncoming,
-      'Message--theirs': this.props.isIncoming
+      'Message--theirs': this.props.isIncoming,
+      'Message--think': this.props.isThink
     });
 
     return (

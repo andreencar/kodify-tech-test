@@ -5,7 +5,6 @@
     border-radius: 15px;
     clear: both;
     word-wrap: break-word;
-    box-sizing: border-box;
 }
 
 .Message--mine {
@@ -18,4 +17,8 @@
     align-self: flex-start;
     color: #000;
     background: linear-gradient(#eceaec 0%,#cfcecf 30%,#cfcecf 70%,#eceaec 100%);
+}
+
+.Message--think {
+    color: #a9a9a9;
 }
