@@ -56,7 +56,7 @@ class MessageService {
                     }
                     break;
                     case "countdown": {
-                        if (commandArgs.length > 2) {
+                        if (commandArgs.length > 2 && getState().currentUserId !== message.userId) {
                             const countdownMessage = {...message, value: commandArgs[2], countdownTimer : commandArgs[1]}
                             return handleDisplayMessage(countdownMessage);
                         }

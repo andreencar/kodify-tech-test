@@ -17,8 +17,8 @@ export function handleMessageReceived(message : Message) {
     }
 }
 
-export function handleOpenNewSite(message : Message) {
+export function handleOpenNewSite(url : string) {
     return ()  => {
-        window.open(message.value, '_blank');
+        window.open(url, '_blank');
     }
 }

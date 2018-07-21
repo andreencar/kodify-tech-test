@@ -12,9 +12,9 @@ type MessageHOCType = {
   isHighlight: ?boolean;
   isIncoming : ?boolean;
   isFade : ?boolean;
-  countdownTime : number;
+  countdownTimer : number;
   timestamp : number;
-  onCountdownTimeFinished : Function
+  onCountdownTimeFinished : (message : string) => void;
 }
 
 type MessageState = {
@@ -30,8 +30,12 @@ class MessageHOC extends Component<MessageHOCType, MessageState> {
   countdownInterval : IntervalID;
 
   componentDidMount () {
-    if (this.props.countdownTime) {
-      this.countdownInterval = setInterval(this.handleCountdown, 1000);
+    if (this.props.countdownTimer) {
+        this.setState({
+            counter : this.props.countdownTimer
+        }, () => {
+            this.countdownInterval = setInterval(this.handleCountdown, 1000);
+        });
     }
   }
 
@@ -44,7 +48,7 @@ class MessageHOC extends Component<MessageHOCType, MessageState> {
   handleCountdown = () => {
     if (this.state.counter === 1) {
       clearInterval(this.countdownInterval);
-      this.props.onCountdownTimeFinished();
+      this.props.onCountdownTimeFinished(this.props.value);
     }
     this.setState(this.decrementCounter);
   }
@@ -52,8 +56,9 @@ class MessageHOC extends Component<MessageHOCType, MessageState> {
   decrementCounter = (prevState : any) : $Shape<MessageState> => {
     var result : $Shape<MessageState> = {};
     if (prevState.counter) {
+        const calculation = prevState.counter - 1;
       result = {
-        counter : prevState.counter - 1
+        counter : calculation !== 0 ? prevState.counter - 1 : null
       };
     }
     return result;
