@@ -1,0 +1,12 @@
+.Chatbox {
+    display: flex;
+    flex:1;
+}
+
+.Chatbox--input {
+    flex:1;
+}
+
+.Chatbox--button {
+    width:60px;
+}

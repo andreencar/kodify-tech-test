@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
-import Message from './components/Message';
+import MessageList from './components/MessageList';
 import {handleSubmitMessage, handleMessageReceived} from "./action-creators/ChatActionCreator";
 
 import './App.css';
@@ -43,9 +43,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
         <Header title= {this.props.nickname} />
-        { this.props.messages.map((message) => {
-          return (<Message key={message.messageId} {...message}/>);
-        })}
+        <MessageList messages={this.props.messages} />
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
       </div>
     );

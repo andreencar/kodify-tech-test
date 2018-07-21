@@ -15,7 +15,7 @@ class Message extends Component<MessageType> {
 
     return (
       <div className={messageClass}>
-        {this.props.userId} {this.props.value}
+        {this.props.value}
       </div>
     );
   }
