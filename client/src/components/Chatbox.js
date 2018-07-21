@@ -37,7 +37,9 @@ class Chatbox extends Component<ChatboxProps> {
     return (
       <div className="Chatbox">
         <input type="text" className={"Chatbox--input"} onChange={this.handleTextChange} value={this.state.textValue}/>
-        <button className={"Chatbox--button"} onClick={this.handleSubmitMessage}>SEND</button>
+        <div className="Chatbox--button-wrapper">
+          <button className={"Chatbox--button"} onClick={this.handleSubmitMessage}>SEND</button>
+        </div>
       </div>
     );
   }
