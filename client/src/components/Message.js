@@ -11,48 +11,11 @@ type MessageType = {
   isHighlight: ?boolean;
   isIncoming : ?boolean;
   isFade : ?boolean;
-  countdownTime : number;
-  timestamp : number;
-  onCountdownTimeFinished : Function
-}
-
-type MessageState = {
   counter : ?number;
+  timestamp : number;
 }
 
-class Message extends Component<MessageType, MessageState> {
-
-  countdownInterval : IntervalID;
-
-  componentDidMount () {
-    if (this.props.countdownTime) {
-      this.countdownInterval = setInterval(this.handleCountdown, 1000);
-    }
-  }
-
-  componentWillUnmount () {
-    if (this.countdownInterval) {
-      clearInterval(this.countdownInterval);
-    }
-  }
-
-  handleCountdown = () => {
-    if (this.state.counter === 1) {
-      clearInterval(this.countdownInterval);
-      this.props.onCountdownTimeFinished();
-    }
-    this.setState(this.decrementCounter);
-  }
-
-  decrementCounter = (prevState : any) : $Shape<MessageState> => {
-    var result : $Shape<MessageState> = {};
-    if (prevState.counter) {
-      result = {
-        counter : prevState.counter - 1
-      };
-    }
-    return result;
-  }
+class Message extends Component<MessageType> {
 
   render() {
     const messageClass = classNames({
@@ -66,7 +29,7 @@ class Message extends Component<MessageType, MessageState> {
 
     return (
       <div className={messageClass}>
-        {this.state.counter && <span className="Message--countdown" >{this.state.counter}</span>}
+        {this.props.counter && <span className="Message--countdown" >{this.props.counter}</span>}
         {this.props.value}
       </div>
     );

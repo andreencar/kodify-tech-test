@@ -61,6 +61,7 @@ class MessageService {
                             return handleDisplayMessage(countdownMessage);
                         }
                     }
+                    break;
                     default:
                         return handleDisplayMessage(message);
                 }

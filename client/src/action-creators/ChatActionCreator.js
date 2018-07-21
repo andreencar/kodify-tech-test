@@ -16,3 +16,9 @@ export function handleMessageReceived(message : Message) {
         }
     }
 }
+
+export function handleOpenNewSite(message : Message) {
+    return ()  => {
+        window.open(message.value, '_blank');
+    }
+}

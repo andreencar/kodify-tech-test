@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import Message from './Message';
+import MessageHOC from './HOC/MessageHOC';
 import type { Message as MessageType} from '../types/types';
 import '../styles/MessageList.css';
 
 
 type MessageListProps = {
-    messages : Array<MessageType>
+    messages : Array<MessageType>,
 }
 
 class MessageList extends Component<MessageListProps> {
@@ -15,7 +15,7 @@ class MessageList extends Component<MessageListProps> {
     return (
       <div className={"MessageList"}>
         { this.props.messages.map((message) => {
-          return (<Message key={message.messageId} {...message}/>);
+          return (<MessageHOC key={message.messageId} {...message}/>);
         })}
       </div>
     );
