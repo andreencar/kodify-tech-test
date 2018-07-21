@@ -81,6 +81,14 @@ class MessageService {
         const lastUserMessage = _.findLast(orderedMessages, (msg) => { return msg.userId === userId});
         return lastUserMessage;
     }
+
+    SubmitTypingStarted = async (userId: string, sentTimestamp : number) => {
+        const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 5000);
+        if (hasEnoughTimePassed) {
+            await this.SubmitMessage(userId, "/typing");
+            return handleUserStartedTyping();
+        }
+    }
     
     SubmitMessage = async (userId : string, message : string) => {
         const messageToSubmit : Message = {

@@ -19,10 +19,11 @@ export function handleMessageReceived(message : Message) {
 
 export function handleUserStartedTyping() {
     return async (dispatch : any, getState : () => ChatState ) => {
-        const sentTimestamp : number = getState().lastTypingSentTimestamp
-        const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 5000);
-        if (hasEnoughTimePassed) {
-            await MessageService.SubmitMessage(getState().currentUserId, "/typing");
+        const sentTimestamp : number = getState().lastTypingSentTimestamp;
+        const userId : string = getState().currentUserId;
+        const actionToDispatch = await MessageService.SubmitTypingStarted(userId, sentTimestamp);
+        if (actionToDispatch) {
+            dispatch(actionToDispatch);
         }
     };
 }
