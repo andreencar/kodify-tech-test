@@ -6,7 +6,8 @@ import generateUUID from 'uuid/v4';
 const initialState : ChatState = {
     nickname : "Kodify Tech Test",
     messages : [],
-    currentUserId : generateUUID()
+    currentUserId : generateUUID(),
+    lastTypingSentTimestamp : null
 }
 
 export default (state : ChatState = initialState, action : any) : ChatState => {

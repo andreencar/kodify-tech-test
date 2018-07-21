@@ -13,5 +13,6 @@ export type Message = {
 export type ChatState = {
     nickname : string,
     messages : Array<Message>,
-    currentUserId : string
+    currentUserId : string,
+    lastTypingSentTimestamp : number
 }

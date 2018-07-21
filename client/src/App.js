@@ -5,7 +5,7 @@ import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import MessageList from './components/MessageList';
-import {handleSubmitMessage, handleMessageReceived} from "./action-creators/ChatActionCreator";
+import {handleSubmitMessage, handleMessageReceived, handleUserStartedTyping} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
@@ -17,7 +17,8 @@ type AppProps = {
   nickname: string,
   messages : Array<MessageType>,
   handleMessageReceived : Function,
-  handleSubmitMessage : (message : string) => any 
+  handleSubmitMessage : (message : string) => any,
+  handleUserStartedTyping : Function
 }
 
 type AppState = {
@@ -46,7 +47,7 @@ class App extends Component<AppProps, AppState> {
         <div className="App--MessageList--wrapper" >
           <MessageList messages={this.props.messages} />
         </div>
-        <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
+        <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} handleTextChange={this.props.handleUserStartedTyping} />
       </div>
     );
   }
@@ -59,4 +60,4 @@ function mapStateToProps(state : ChatState) : $Shape<AppProps> {
   };
 }
 
-export default connect(mapStateToProps, {handleMessageReceived, handleSubmitMessage})(App);
+export default connect(mapStateToProps, {handleMessageReceived, handleSubmitMessage, handleUserStartedTyping})(App);

@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import '../styles/Chatbox.css';
 
 type ChatboxProps = {
-  handleSubmitMesssage : (message : string) => any
+  handleSubmitMesssage : (message : string) => any,
+  handleTextChange : Function
 }
 
 type ChatboxState = {
@@ -21,6 +22,7 @@ class Chatbox extends Component<ChatboxProps> {
       textValue : ev.currentTarget.value
     }; 
     this.setState(stateToUpdate);
+    this.props.handleTextChange();
   }
 
   handleSubmitMessage = () => {

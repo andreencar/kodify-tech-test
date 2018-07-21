@@ -17,6 +17,16 @@ export function handleMessageReceived(message : Message) {
     }
 }
 
+export function handleUserStartedTyping() {
+    return async (dispatch : any, getState : () => ChatState ) => {
+        const sentTimestamp : number = getState().lastTypingSentTimestamp
+        const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 5000);
+        if (hasEnoughTimePassed) {
+            await MessageService.SubmitMessage(getState().currentUserId, "/typing");
+        }
+    };
+}
+
 export function handleOpenNewSite(url : string) {
     return ()  => {
         window.open(url, '_blank');
