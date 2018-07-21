@@ -33,10 +33,16 @@ class Chatbox extends Component<ChatboxProps> {
     }
   }
 
+  handleKeyPress = (event : SyntheticKeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      this.handleSubmitMessage();
+    }
+  }
+
   render() {
     return (
       <div className="Chatbox">
-        <input type="text" className={"Chatbox--input"} onChange={this.handleTextChange} value={this.state.textValue}/>
+        <input type="text" className={"Chatbox--input"} onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.textValue}/>
         <div className="Chatbox--button-wrapper">
           <button className={"Chatbox--button"} onClick={this.handleSubmitMessage}>SEND</button>
         </div>
