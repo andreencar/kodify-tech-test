@@ -5,8 +5,10 @@
     bottom: 0;
     width: 100%;
     flex:1;
-    height: 25px;
+    height: 30px;
     padding: 5px;
+    padding-left:10px;
+    padding-right: 10px;
     background : linear-gradient(#f1f3f5, #c3c6c9)
 }
 
