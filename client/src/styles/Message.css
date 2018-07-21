@@ -1,5 +1,11 @@
 .Message {
-
+    padding: 8px 10px;
+    max-width: 200px;
+    margin: 5px 10px;
+    border-radius: 15px;
+    clear: both;
+    word-wrap: break-word;
+    box-sizing: border-box;
 }
 
 .Message--mine {

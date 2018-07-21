@@ -43,7 +43,9 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
         <Header title= {this.props.nickname} />
-        <MessageList messages={this.props.messages} />
+        <div className="App--MessageList--wrapper" >
+          <MessageList messages={this.props.messages} />
+        </div>
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} />
       </div>
     );
