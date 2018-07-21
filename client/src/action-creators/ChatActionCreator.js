@@ -17,7 +17,7 @@ export function handleMessageReceived(message : Message) {
     }
 }
 
-export function handleUserStartedTyping() {
+export function handleSendTypingMessage() {
     return async (dispatch : any, getState : () => ChatState ) => {
         const sentTimestamp : number = getState().lastTypingSentTimestamp;
         const userId : string = getState().currentUserId;

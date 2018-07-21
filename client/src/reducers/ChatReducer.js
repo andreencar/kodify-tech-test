@@ -7,7 +7,8 @@ const initialState : ChatState = {
     nickname : "Kodify Tech Test",
     messages : [],
     currentUserId : generateUUID(),
-    lastTypingSentTimestamp : null
+    lastTypingSentTimestamp : null,
+    isTyping : false
 }
 
 export default (state : ChatState = initialState, action : any) : ChatState => {
@@ -23,6 +24,15 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
         }
         case ChatActionTypes.MESSAGE_UPDATED: {
             return {... state, messages : state.messages.map((message) => { return message.messageId !== action.payload.messageId ? message : action.payload})}
+        }
+        case ChatActionTypes.TYPING_STARTED_MESSAGE_SENT: {
+            return {...state, lastTypingSentTimestamp: action.payload};
+        }
+        case ChatActionTypes.USER_STARTED_TYPING: {
+            return {...state, isTyping: true};
+        }
+        case ChatActionTypes.USER_STOPPED_TYPING: {
+            return {...state, isTyping : false};
         }
         default:
             return state;

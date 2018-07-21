@@ -32,15 +32,20 @@ export const handleRemoveMessage = (messageId : string) => {
 
 export const handleUserStartedTyping = () => {
     return {
-        type : ChatActionTypes.USER_STARTED_TYPING,
-        payload : true
+        type : ChatActionTypes.USER_STARTED_TYPING
+    } ;  
+}
+
+export const handleMessageTypingSent = () => {
+    return {
+        type : ChatActionTypes.TYPING_STARTED_MESSAGE_SENT,
+        payload : new Date().getTime()
     } ;  
 }
 
 export const handleUserStoppedTyping = () => {
     return {
-        type : ChatActionTypes.USER_STOPPED_TYPING,
-        payload : false
+        type : ChatActionTypes.USER_STOPPED_TYPING
     } ;  
 }
 

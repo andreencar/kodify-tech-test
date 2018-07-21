@@ -14,5 +14,6 @@ export type ChatState = {
     nickname : string,
     messages : Array<Message>,
     currentUserId : string,
-    lastTypingSentTimestamp : number
+    lastTypingSentTimestamp : number,
+    isTyping : boolean
 }

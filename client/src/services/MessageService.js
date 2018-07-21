@@ -3,7 +3,7 @@ import _ from 'lodash';
 import generateUUID from 'uuid/v4';
 import emoji from "emoji-dictionary";
 
-import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage, handleUserStartedTyping } from '../actions/ChatActions';
+import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage, handleUserStartedTyping, handleMessageTypingSent } from '../actions/ChatActions';
 
 import { Message, ChatState } from '../types/types';
 
@@ -67,6 +67,7 @@ class MessageService {
                             return handleUserStartedTyping();
                         }
                     }
+                    break;
                     default:
                         return handleDisplayMessage(message);
                 }
@@ -86,7 +87,7 @@ class MessageService {
         const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 5000);
         if (hasEnoughTimePassed) {
             await this.SubmitMessage(userId, "/typing");
-            return handleUserStartedTyping();
+            return handleMessageTypingSent();
         }
     }
     
