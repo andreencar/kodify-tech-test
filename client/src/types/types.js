@@ -3,6 +3,7 @@ export type Message = {
     userId : string;
     messageId : string;
     isThink : ?boolean;
+    isHighlight: ?boolean;
     isIncoming : ?boolean;
     timestamp : number;
 }

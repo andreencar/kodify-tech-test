@@ -25,6 +25,10 @@
     color: #a9a9a9;
 }
 
+.Message--highlight {
+    font-size: 110%;
+    filter: brightness(90%);
+}
 
 @keyframes slideRight {
     0% {

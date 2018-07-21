@@ -23,14 +23,24 @@ class MessageService {
                     }
                     break;
                     case "think": {
-                        const messageWithThink = {...message, value: stringAfterCommand, isThink : true}
-                        return handleDisplayMessage(messageWithThink);
+                        if (commandArgs.length > 1) {
+                            const messageWithThink = {...message, value: stringAfterCommand, isThink : true}
+                            return handleDisplayMessage(messageWithThink);
+                        }
                     }
+                    break;
                     case "oops": {
                         const orderedMessages = _.orderBy(getState().messages, ['timestamp'],['asc']);
                         const messageToRemove = _.findLast(orderedMessages, (msg) => { return msg.userId === message.userId});
                         if (messageToRemove) {
                             return handleRemoveMessage(messageToRemove.messageId);
+                        }
+                    }
+                    break;
+                    case "highlight": {
+                        if (commandArgs.length > 1) {
+                            const messageWithHighlight = {...message, value: stringAfterCommand, isHighlight : true}
+                            return handleDisplayMessage(messageWithHighlight);
                         }
                     }
                     break;
