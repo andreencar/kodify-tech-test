@@ -17,7 +17,7 @@ class MessageList extends Component<MessageListProps> {
         { this.props.messages.map((message) => {
           return (<MessageHOC key={message.messageId} {...message}/>);
         })}
-        {this.props.isTyping && <MessageHOC value={"loading"} />}
+        {this.props.isTyping && <MessageHOC isLoading={true} />}
       </div>
     );
   }
