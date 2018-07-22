@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import MessageList from './components/MessageList';
 import {handleUserStoppedTyping} from './actions/ChatActions';
-import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage, handle} from "./action-creators/ChatActionCreator";
+import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
@@ -28,9 +28,9 @@ type AppProps = {
 
 class App extends Component<AppProps> {
 
-  source : EventSource;
+  source : any;
 
-  stopTypingTimeout : IntervalId;
+  stopTypingTimeout : ?TimeoutID;
 
   componentDidMount() {
     this.source = new EventSource("http://localhost:8080/api/chat/sse");
@@ -56,7 +56,9 @@ class App extends Component<AppProps> {
 
   stopUserTyping = () => {
     this.props.handleUserStoppedTyping();
-    this.stopTypingTimeout = null;
+    if (this.stopTypingTimeout) {
+      clearTimeout(this.stopTypingTimeout);
+    }
   }
 
   componentWillUnmount() {

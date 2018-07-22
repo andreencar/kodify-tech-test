@@ -20,53 +20,46 @@ class MessageService {
                 const stringAfterCommand = message.value.substr(message.value.indexOf(' ')+1);
 
                 switch (commandName) {
-                    case "nick": {
+                    case "nick":
                         if (getState().currentUserId !== message.userId && commandArgs.length > 1) {
                             return handleNicknameReceived(stringAfterCommand);
                         }
-                    }
                     break;
-                    case "think": {
+                    case "think":
                         if (commandArgs.length > 1) {
                             const messageWithThink = {...message, value: stringAfterCommand, isThink : true}
                             return handleDisplayMessage(messageWithThink);
                         }
-                    }
                     break;
-                    case "oops": {
+                    case "oops":
                         const messageToRemove = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToRemove) {
                             return handleRemoveMessage(messageToRemove.messageId);
                         }
-                    }
                     break;
-                    case "highlight": {
+                    case "highlight":
                         if (commandArgs.length > 1) {
                             const messageWithHighlight = {...message, value: stringAfterCommand, isHighlight : true}
                             return handleDisplayMessage(messageWithHighlight);
                         }
-                    }
                     break;
-                    case "fadelast": {
+                    case "fadelast":
                         const messageToFade = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToFade) {
                             const messageWithFade = {...messageToFade, isFade : true};
                             return handleUpdateMessage(messageWithFade);
                         }
-                    }
                     break;
-                    case "countdown": {
+                    case "countdown":
                         if (commandArgs.length > 2 && getState().currentUserId !== message.userId) {
                             const countdownMessage = {...message, value: commandArgs[2], countdownTimer : commandArgs[1]}
                             return handleDisplayMessage(countdownMessage);
                         }
-                    }
                     break;
-                    case "typing": {
+                    case "typing":
                         if (getState().currentUserId !== message.userId) {
                             return handleUserStartedTyping();
                         }
-                    }
                     break;
                     default:
                         return handleDisplayMessage(message);
@@ -111,7 +104,7 @@ class MessageService {
     }
 
     ProcessEmoji = (messageValue : string) => {
-        return messageValue.replace(/\(([^\)]+)\)/g, (match, name) => {
+        return messageValue.replace(/\(([^)]+)\)/g, (match, name) => {
             const unicode = emoji.getUnicode(name);
             if (unicode) {
                 return unicode;

@@ -23,10 +23,10 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
             return {...state, nickname : action.payload};
         }
         case ChatActionTypes.MESSAGE_REMOVED: {
-            return {... state, messages : state.messages.filter((message) => { return message.messageId !== action.payload})}
+            return {...state, messages : state.messages.filter((message) => { return message.messageId !== action.payload})}
         }
         case ChatActionTypes.MESSAGE_UPDATED: {
-            return {... state, messages : state.messages.map((message) => { return message.messageId !== action.payload.messageId ? message : action.payload})}
+            return {...state, messages : state.messages.map((message) => { return message.messageId !== action.payload.messageId ? message : action.payload})}
         }
         case ChatActionTypes.TYPING_STARTED_MESSAGE_SENT: {
             return {...state, lastTypingSentTimestamp: action.payload};
