@@ -2,6 +2,8 @@
 import _ from 'lodash';
 import generateUUID from 'uuid/v4';
 import emoji from "emoji-dictionary";
+import { SUBMIT_MESSAGE_URL } from '../Configuration';
+import CommandEnum from '../enums/CommandEnum'
 
 import { handleNicknameReceived, handleDisplayMessage, handleRemoveMessage, handleUpdateMessage, handleUserStartedTyping, handleMessageTypingSent } from '../actions/ChatActions';
 
@@ -20,43 +22,43 @@ class MessageService {
                 const stringAfterCommand = message.value.substr(message.value.indexOf(' ')+1);
 
                 switch (commandName) {
-                    case "nick":
+                    case CommandEnum.nickname:
                         if (getState().currentUserId !== message.userId && commandArgs.length > 1) {
                             return handleNicknameReceived(stringAfterCommand);
                         }
                     break;
-                    case "think":
+                    case CommandEnum.think:
                         if (commandArgs.length > 1) {
                             const messageWithThink = {...message, value: stringAfterCommand, isThink : true}
                             return handleDisplayMessage(messageWithThink);
                         }
                     break;
-                    case "oops":
+                    case CommandEnum.removemessage:
                         const messageToRemove = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToRemove) {
                             return handleRemoveMessage(messageToRemove.messageId);
                         }
                     break;
-                    case "highlight":
+                    case CommandEnum.highlight:
                         if (commandArgs.length > 1) {
                             const messageWithHighlight = {...message, value: stringAfterCommand, isHighlight : true}
                             return handleDisplayMessage(messageWithHighlight);
                         }
                     break;
-                    case "fadelast":
+                    case CommandEnum.fadelast:
                         const messageToFade = this.GetLastMessageFromUser(getState().messages, message.userId);
                         if (messageToFade) {
                             const messageWithFade = {...messageToFade, isFade : true};
                             return handleUpdateMessage(messageWithFade);
                         }
                     break;
-                    case "countdown":
+                    case CommandEnum.countdown:
                         if (commandArgs.length > 2 && getState().currentUserId !== message.userId) {
                             const countdownMessage = {...message, value: commandArgs[2], countdownTimer : commandArgs[1]}
                             return handleDisplayMessage(countdownMessage);
                         }
                     break;
-                    case "typing":
+                    case CommandEnum.typing:
                         if (getState().currentUserId !== message.userId) {
                             return handleUserStartedTyping();
                         }
@@ -79,7 +81,7 @@ class MessageService {
     SubmitTypingStarted = async (userId: string, sentTimestamp : number) => {
         const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 2000);
         if (hasEnoughTimePassed) {
-            await this.SubmitMessage(userId, "/typing");
+            await this.SubmitMessage(userId, "/" + CommandEnum.typing);
             return handleMessageTypingSent();
         }
     }
@@ -91,7 +93,7 @@ class MessageService {
             value : message,
             timestamp : new Date().getTime()
         };
-        await fetch("http://localhost:8080/api/chat", {
+        await fetch("", {
             method : "POST",
             headers: {
                 'Accept': 'application/json',

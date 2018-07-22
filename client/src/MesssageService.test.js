@@ -1,5 +1,6 @@
 import MessageService from "./services/MessageService";
 import * as ChatActionTypes from "./actions/ChatActionTypes";
+import CommandEnum from './enums/CommandEnum';
 
 import type Message from "./types/types";
 
@@ -15,7 +16,7 @@ describe("When /oops command is received", () => {
         };
         const message : Message = {
             userId : "teste",
-            value : "/oops"
+            value : CommandEnum.removemessage
         };
         const result : any = MessageService.ProcessIncomingMessage(message, state);
         expect(result).toBeTruthy();

@@ -50,4 +50,4 @@ Timetable:
 
 21th July
 14:45 - 20:40 (have dinner)
-00:10 - x
+00:10 - 04:21

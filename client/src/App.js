@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import MessageList from './components/MessageList';
 import EventSource from 'eventsource';
+import { RECEIVE_MESSAGES_URL } from './Configuration';
 import {handleUserStoppedTyping} from './actions/ChatActions';
 import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage} from "./action-creators/ChatActionCreator";
 
@@ -30,7 +31,7 @@ class App extends Component<AppProps> {
   stopTypingTimeout : ?TimeoutID;
 
   componentDidMount() {
-    this.source = new EventSource("http://localhost:8080/api/chat/sse");
+    this.source = new EventSource(RECEIVE_MESSAGES_URL);
     this.source.addEventListener("message_submited", (e : any) => {
       if (e.data) {
         var messageObject = JSON.parse(e.data);
