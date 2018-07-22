@@ -16,3 +16,5 @@ There is a Changelog.md that I was updating while I was doing this exam, explain
 
 Only did one test on MessageService as an example on which class to focus on to test the separated business logic. The technical test did not require it but seemed appropriate to showcase.
 
+Started Exam - 20th July @ 15:00 
+Ended Exam - 21th July @ 04:23
