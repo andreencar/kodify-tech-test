@@ -4,9 +4,9 @@ import MessageHOC from './HOC/MessageHOC';
 import type { Message as MessageType} from '../types/types';
 import '../styles/MessageList.css';
 
-
 type MessageListProps = {
     messages : Array<MessageType>,
+    isTyping : boolean
 }
 
 class MessageList extends Component<MessageListProps> {
@@ -17,6 +17,7 @@ class MessageList extends Component<MessageListProps> {
         { this.props.messages.map((message) => {
           return (<MessageHOC key={message.messageId} {...message}/>);
         })}
+        {this.props.isTyping && <MessageHOC value={"loading"} />}
       </div>
     );
   }

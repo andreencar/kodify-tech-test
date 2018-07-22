@@ -84,7 +84,7 @@ class MessageService {
     }
 
     SubmitTypingStarted = async (userId: string, sentTimestamp : number) => {
-        const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 5000);
+        const hasEnoughTimePassed = !(sentTimestamp && new Date().getTime() - sentTimestamp < 2000);
         if (hasEnoughTimePassed) {
             await this.SubmitMessage(userId, "/typing");
             return handleMessageTypingSent();

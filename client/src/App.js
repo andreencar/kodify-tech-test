@@ -5,7 +5,8 @@ import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import MessageList from './components/MessageList';
-import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage} from "./action-creators/ChatActionCreator";
+import {handleUserStoppedTyping} from './actions/ChatActions';
+import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage, handle} from "./action-creators/ChatActionCreator";
 
 import './App.css';
 
@@ -16,23 +17,23 @@ declare class EventSource extends EventTarget {
 type AppProps = {
   nickname: string,
   messages : Array<MessageType>,
+  isTyping : boolean,
+  lastTypingReceivedTimestamp : number,
   handleMessageReceived : Function,
   handleSubmitMessage : (message : string) => any,
-  handleSendTypingMessage : Function
+  handleSendTypingMessage : Function,
+  handleUserStoppedTyping : Function
 }
 
-type AppState = {
-  source : EventSource
-}
+class App extends Component<AppProps> {
 
-class App extends Component<AppProps, AppState> {
+  source : EventSource;
+
+  stopTypingTimeout : IntervalId;
 
   componentDidMount() {
-    var source : EventSource = new EventSource("http://localhost:8080/api/chat/sse");
-    this.setState({
-      source : source
-    });
-    source.addEventListener("message_submited", (e : any) => {
+    this.source = new EventSource("http://localhost:8080/api/chat/sse");
+    this.source.addEventListener("message_submited", (e : any) => {
       if (e.data) {
         var messageObject = JSON.parse(e.data);
         this.props.handleMessageReceived(messageObject);
@@ -40,12 +41,30 @@ class App extends Component<AppProps, AppState> {
     });
   }
 
+  componentDidUpdate(prevProps : AppProps) {
+    if (this.props.lastTypingReceivedTimestamp !== prevProps.lastTypingReceivedTimestamp) {
+      if (this.stopTypingTimeout) {
+        clearTimeout(this.stopTypingTimeout);
+      } 
+      this.stopTypingTimeout = setTimeout(this.stopUserTyping, 4000);
+    }
+  }
+
+  stopUserTyping = () => {
+    this.props.handleUserStoppedTyping();
+    this.stopTypingTimeout = null;
+  }
+
+  componentWillUnmount() {
+    this.source.removeEventListener("message_submited");
+  }
+
   render() {
     return (
       <div className="App">
         <Header title= {this.props.nickname} />
         <div className="App--MessageList--wrapper" >
-          <MessageList messages={this.props.messages} />
+          <MessageList messages={this.props.messages} isTyping={this.props.isTyping}/>
         </div>
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} handleTextChange={this.props.handleSendTypingMessage} />
       </div>
@@ -56,8 +75,10 @@ class App extends Component<AppProps, AppState> {
 function mapStateToProps(state : ChatState) : $Shape<AppProps> {
   return {
     nickname: state.nickname,
-    messages : state.messages
+    messages : state.messages,
+    isTyping : state.isTyping,
+    lastTypingReceivedTimestamp : state.lastTypingReceivedTimestamp
   };
 }
 
-export default connect(mapStateToProps, {handleMessageReceived, handleSubmitMessage, handleSendTypingMessage})(App);
+export default connect(mapStateToProps, {handleMessageReceived, handleSubmitMessage, handleSendTypingMessage, handleUserStoppedTyping})(App);

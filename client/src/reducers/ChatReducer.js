@@ -8,6 +8,7 @@ const initialState : ChatState = {
     messages : [],
     currentUserId : generateUUID(),
     lastTypingSentTimestamp : null,
+    lastTypingReceivedTimestamp : null,
     isTyping : false
 }
 
@@ -29,7 +30,7 @@ export default (state : ChatState = initialState, action : any) : ChatState => {
             return {...state, lastTypingSentTimestamp: action.payload};
         }
         case ChatActionTypes.USER_STARTED_TYPING: {
-            return {...state, isTyping: true};
+            return {...state, isTyping: true, lastTypingReceivedTimestamp: new Date().getTime()};
         }
         case ChatActionTypes.USER_STOPPED_TYPING: {
             return {...state, isTyping : false};
