@@ -5,14 +5,11 @@ import type {ChatState, Message as MessageType} from "./types/types";
 import Header from './components/Header';
 import Chatbox from './components/Chatbox';
 import MessageList from './components/MessageList';
+import EventSource from 'eventsource';
 import {handleUserStoppedTyping} from './actions/ChatActions';
 import {handleSubmitMessage, handleMessageReceived, handleSendTypingMessage} from "./action-creators/ChatActionCreator";
 
 import './App.css';
-
-declare class EventSource extends EventTarget {
-  constructor(url: string): EventSource;
-}
 
 type AppProps = {
   nickname: string,

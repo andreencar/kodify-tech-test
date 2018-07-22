@@ -39,9 +39,15 @@ On the final bonus point which is user typing. I'm thinking about adding a /typi
 
 The client that is receiving needs to be able to reset the typing state after x time as well.
 
+------
+
+Ended development. Unhappy about some tight copulation on some places. Fun exam.
 
 Timetable:
 
+20th July
 15:00 - 18:00
+
+21th July
 14:45 - 20:40 (have dinner)
 00:10 - x
