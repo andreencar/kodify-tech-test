@@ -11,6 +11,7 @@ type MessageHOCType = {
   isThink : ?boolean;
   isHighlight: ?boolean;
   isIncoming : ?boolean;
+  isLoading : ?boolean;
   isFade : ?boolean;
   countdownTimer : number;
   timestamp : number;
@@ -53,7 +54,7 @@ class MessageHOC extends Component<MessageHOCType, MessageState> {
     this.setState(this.decrementCounter);
   }
 
-  decrementCounter = (prevState : any) : $Shape<MessageState> => {
+  decrementCounter = (prevState : MessageState) : $Shape<MessageState> => {
     var result : $Shape<MessageState> = {};
     if (prevState.counter) {
         const calculation = prevState.counter - 1;

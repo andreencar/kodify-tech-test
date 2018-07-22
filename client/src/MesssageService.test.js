@@ -1,4 +1,3 @@
-// @flow
 import MessageService from "./services/MessageService";
 import * as ChatActionTypes from "./actions/ChatActionTypes";
 
