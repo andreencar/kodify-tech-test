@@ -67,9 +67,7 @@ class App extends Component<AppProps> {
     return (
       <div className="App">
         <Header title= {this.props.nickname} />
-        <div className="App--MessageList--wrapper" >
-          <MessageList messages={this.props.messages} isTyping={this.props.isTyping}/>
-        </div>
+        <MessageList messages={this.props.messages} isTyping={this.props.isTyping}/>
         <Chatbox handleSubmitMessage={this.props.handleSubmitMessage} handleTextChange={this.props.handleSendTypingMessage} />
       </div>
     );

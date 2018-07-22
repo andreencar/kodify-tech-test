@@ -6,4 +6,13 @@
     height: 100%;
     position:relative;
     overflow:auto;
+    margin-top: auto;
+}
+
+.MessageList--wrapper {
+    display: flex;
+    order: 2;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #d7dce6
 }
