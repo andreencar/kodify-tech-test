@@ -1,12 +1,12 @@
 .Header {
     display: flex;
-    flex-shrink: 0;
     width: 100%;
-    position: absolute;
-    align-items: center;
-    justify-content: center; 
-    flex-shrink: 0;
     height: 50px;
+    order: 1;
+    flex-shrink: 0;
+    flex-basis: 50px;
+    align-items: center;
+    justify-content: center;
     color: #FFFFFF;
     z-index:1;
     background: linear-gradient(#bbc7d7,#5f7595);
