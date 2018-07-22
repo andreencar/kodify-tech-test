@@ -9,13 +9,15 @@ const initialState : ChatState = {
     currentUserId : generateUUID(),
     lastTypingSentTimestamp : null,
     lastTypingReceivedTimestamp : null,
+    lastIncomingMessage : null,
     isTyping : false
 }
 
 export default (state : ChatState = initialState, action : any) : ChatState => {
     switch( action.type ) {
         case ChatActionTypes.MESSAGE_RECEIVED: {
-            return {...state, messages : [...state.messages, action.payload]};
+            const lastIncomingMessage = action.payload.userId === state.currentUserId ? state.lastIncomingMessage : action.payload;
+            return {...state, messages : [...state.messages, action.payload], lastIncomingMessage: lastIncomingMessage};
         }
         case ChatActionTypes.NICKNAME_SET: {
             return {...state, nickname : action.payload};

@@ -25,7 +25,7 @@ class Message extends Component<MessageType> {
       'Message--theirs': this.props.isIncoming,
       'Message--think': this.props.isThink,
       'Message--highlight' : this.props.isHighlight,
-      'Message--fade': this.props.isFade,
+      'Message--fade': this.props.isFade
     });
 
     return (

@@ -19,6 +19,7 @@ type AppProps = {
   messages : Array<MessageType>,
   isTyping : boolean,
   lastTypingReceivedTimestamp : number,
+  lastIncomingMessage : MessageType,
   handleMessageReceived : Function,
   handleSubmitMessage : (message : string) => any,
   handleSendTypingMessage : Function,
@@ -47,6 +48,9 @@ class App extends Component<AppProps> {
         clearTimeout(this.stopTypingTimeout);
       } 
       this.stopTypingTimeout = setTimeout(this.stopUserTyping, 4000);
+    }
+    if (prevProps.lastIncomingMessage !== this.props.lastIncomingMessage) {
+      this.props.handleUserStoppedTyping();
     }
   }
 
@@ -77,7 +81,8 @@ function mapStateToProps(state : ChatState) : $Shape<AppProps> {
     nickname: state.nickname,
     messages : state.messages,
     isTyping : state.isTyping,
-    lastTypingReceivedTimestamp : state.lastTypingReceivedTimestamp
+    lastTypingReceivedTimestamp : state.lastTypingReceivedTimestamp,
+    lastIncomingMessage : state.lastIncomingMessage
   };
 }
 
