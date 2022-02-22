@@ -1,4 +1,4 @@
-export default const Command = Object.freeze({
+const Command = Object.freeze({
     nickname:   "nick",
     think: "think",
     removemessage : "oops",
@@ -7,3 +7,5 @@ export default const Command = Object.freeze({
     countdown : "countdown",
     typing : "typing"
 });
+
+export default Command;

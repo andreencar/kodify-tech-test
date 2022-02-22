@@ -93,7 +93,7 @@ class MessageService {
             value : message,
             timestamp : new Date().getTime()
         };
-        await fetch("", {
+        await fetch(SUBMIT_MESSAGE_URL, {
             method : "POST",
             headers: {
                 'Accept': 'application/json',
